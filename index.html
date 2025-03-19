@@ -1,25 +1,115 @@
 <!DOCTYPE html>
-<html lang="es">
+<html lang="en">
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Mi Blog de Recursos</title>
+    <title>CLIL Learning Hub</title>
     <style>
-        body { font-family: Arial, sans-serif; text-align: center; }
-        .container { width: 80%; margin: auto; padding: 20px; }
-        .post { border: 1px solid #ddd; padding: 10px; margin: 10px; }
+        body {
+            font-family: Arial, sans-serif;
+            background: #f4f4f4;
+            color: #333;
+            margin: 0;
+            padding: 0;
+        }
+        .header {
+            background: #bb1919;
+            color: white;
+            padding: 15px;
+            text-align: center;
+            font-size: 24px;
+            font-weight: bold;
+        }
+        .menu {
+            display: flex;
+            justify-content: center;
+            background: #222;
+            padding: 10px 0;
+        }
+        .menu a {
+            color: white;
+            text-decoration: none;
+            padding: 15px 20px;
+            font-size: 18px;
+            transition: background 0.3s;
+        }
+        .menu a:hover {
+            background: #bb1919;
+        }
+        .container {
+            width: 90%;
+            max-width: 1000px;
+            margin: auto;
+            padding: 20px;
+            background: white;
+            box-shadow: 0 4px 8px rgba(0, 0, 0, 0.2);
+        }
+        .tab-content {
+            display: none;
+            padding: 20px;
+        }
+        .tab-content.active {
+            display: block;
+        }
+        .post {
+            background: #eee;
+            padding: 15px;
+            margin-bottom: 15px;
+            border-left: 5px solid #bb1919;
+        }
     </style>
+    <script>
+        function openTab(tabName) {
+            var tabs = document.getElementsByClassName("tab-content");
+            for (var i = 0; i < tabs.length; i++) {
+                tabs[i].classList.remove("active");
+            }
+            document.getElementById(tabName).classList.add("active");
+        }
+    </script>
 </head>
 <body>
-    <h1>Bienvenido a mi Blog de Recursos</h1>
+    <div class="header">CLIL Learning Hub</div>
+    <div class="menu">
+        <a href="#" onclick="openTab('home')">Home</a>
+        <a href="#" onclick="openTab('listening')">Listening</a>
+        <a href="#" onclick="openTab('speaking')">Speaking</a>
+        <a href="#" onclick="openTab('reading')">Reading</a>
+        <a href="#" onclick="openTab('writing')">Writing</a>
+    </div>
+    
     <div class="container">
-        <div class="post">
-            <h2>Actividad 1: Vocabulario con imágenes</h2>
-            <p>Descripción de la actividad...</p>
+        <div id="home" class="tab-content active">
+            <h1>Welcome to CLIL Learning Hub</h1>
+            <p>Select a skill from the menu above to explore activities.</p>
         </div>
-        <div class="post">
-            <h2>Recurso Externo: Diccionario Visual</h2>
-            <p>Visita <a href="https://ejemplo.com">este enlace</a> para más detalles.</p>
+        <div id="listening" class="tab-content">
+            <h2>Listening Activities</h2>
+            <div class="post">
+                <h3>Activity 1: Podcast Comprehension</h3>
+                <p>Listen to a short podcast and answer comprehension questions.</p>
+            </div>
+        </div>
+        <div id="speaking" class="tab-content">
+            <h2>Speaking Activities</h2>
+            <div class="post">
+                <h3>Activity 1: Role-Playing</h3>
+                <p>Practice conversation through guided role-playing exercises.</p>
+            </div>
+        </div>
+        <div id="reading" class="tab-content">
+            <h2>Reading Activities</h2>
+            <div class="post">
+                <h3>Activity 1: Story Analysis</h3>
+                <p>Read a short story and analyze its key elements.</p>
+            </div>
+        </div>
+        <div id="writing" class="tab-content">
+            <h2>Writing Activities</h2>
+            <div class="post">
+                <h3>Activity 1: Creative Writing</h3>
+                <p>Write a short paragraph based on a given prompt.</p>
+            </div>
         </div>
     </div>
 </body>
