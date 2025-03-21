@@ -11,19 +11,26 @@
       font-family: Arial, sans-serif;
       display: flex;
       flex-direction: column;
-      background: #f4f4f4;
+      background: #f4f4f4 url('https://images.unsplash.com/photo-1498050108023-c5249f4df085?ixlib=rb-1.2.1&auto=format&fit=crop&w=1952&q=80') no-repeat center center fixed;
+      background-size: cover;
       color: #333;
     }
     header {
-      background: #bb1919;
+      background: rgba(187, 25, 25, 0.9); /* Semi-transparent background */
       color: white;
       padding: 20px;
       text-align: center;
       box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
+    .header-image {
+      width: 100%;
+      max-height: 200px;
+      object-fit: cover;
+      border-bottom: 5px solid #bb1919;
+    }
     /* Top Navigation Menu */
     .top-menu {
-      background: #222;
+      background: rgba(34, 34, 34, 0.9); /* Semi-transparent background */
       display: flex;
       justify-content: center;
       padding: 10px;
@@ -45,6 +52,10 @@
       display: flex;
       flex: 1;
       min-height: 80vh;
+      background: rgba(255, 255, 255, 0.9); /* Semi-transparent background */
+      margin: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
     /* Main Content Area */
     .main-content {
@@ -195,6 +206,7 @@
 </head>
 <body>
   <header>
+    <img class="header-image" src="https://images.unsplash.com/photo-1524995997946-a1c2e315a42f?ixlib=rb-1.2.1&auto=format&fit=crop&w=1950&q=80" alt="English Learning">
     <h1>Technology Applied to Teaching L2</h1>
     <p>Welcome to our blog for using technology in L2, designed by Christiam Puentes.</p>
   </header>
@@ -211,6 +223,8 @@
       <div id="home" class="tab-content active">
         <h2>Home</h2>
         <p>Welcome to our blog where we explore innovative ways to use technology in teaching a second language (L2). Here, you'll find interactive activities, engaging resources, and insightful readings to enhance language learning.</p>
+        <p><strong>Why is English important?</strong></p>
+        <p>English is one of the most widely spoken languages in the world. It is the primary language of international communication, business, science, and technology. Learning English opens up opportunities for education, career advancement, and cultural exchange. It allows you to connect with people from different parts of the world and access a wealth of knowledge and resources.</p>
         <div class="video-container">
           <iframe src="https://www.youtube.com/embed/mzT2Up5icbM" frameborder="0" allowfullscreen></iframe>
         </div>
