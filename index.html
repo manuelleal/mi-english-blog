@@ -3,335 +3,132 @@
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
-  <title>Technology Applied to Teaching L2 - Blog</title>
+  <title>Technology Applied to L2 Teaching Blog</title>
+  <link rel="stylesheet" href="https://stackpath.bootstrapcdn.com/bootstrap/5.1.3/css/bootstrap.min.css">
   <style>
-    /* Global Styles */
     body {
-      margin: 0;
+      display: flex;
+      min-height: 100vh;
       font-family: Arial, sans-serif;
-      display: flex;
-      flex-direction: column;
-      background: #f4f4f4;
-      color: #333;
+      background-color: #f8f9fa;
     }
-    header {
-      background: #bb1919;
-      color: white;
-      padding: 15px;
-      text-align: center;
-    }
-    /* Top Navigation Menu */
-    .top-menu {
-      background: #222;
-      display: flex;
-      justify-content: center;
-    }
-    .top-menu a {
-      color: white;
-      text-decoration: none;
-      padding: 15px 20px;
-      font-size: 18px;
-      transition: background 0.3s;
-    }
-    .top-menu a:hover {
-      background: #bb1919;
-    }
-    /* Layout Container */
-    .container {
-      display: flex;
-      flex: 1;
-      min-height: 80vh;
-    }
-    /* Sidebar (Left Menu) */
     .sidebar {
       width: 250px;
-      background: #f0f0f0;
+      background-color: #343a40;
+      color: #fff;
       padding: 15px;
-      border-right: 1px solid #ccc;
+      display: none; /* Oculto por defecto */
     }
-    .sidebar details {
-      margin-bottom: 10px;
-    }
-    .sidebar summary {
-      cursor: pointer;
-      font-weight: bold;
-      padding: 5px;
+    .sidebar h2 {
+      font-size: 1.2rem;
+      margin-bottom: 1rem;
     }
     .sidebar ul {
       list-style: none;
-      padding-left: 15px;
+      padding: 0;
     }
-    .sidebar li {
-      margin-bottom: 5px;
+    .sidebar ul li {
+      margin-bottom: 0.5rem;
     }
-    /* Main Content Area */
-    .main-content {
+    .sidebar ul li a {
+      color: #fff;
+      text-decoration: none;
+    }
+    .sidebar ul li a:hover {
+      text-decoration: underline;
+    }
+    .content {
       flex: 1;
       padding: 20px;
     }
-    /* Tab Content */
-    .tab-content {
-      display: none;
+    .nav-tabs .nav-link {
+      color: #495057;
     }
-    .tab-content.active {
-      display: block;
+    .nav-tabs .nav-link.active {
+      color: #fff;
+      background-color: #007bff;
     }
-    /* Video Container */
-    .video-container {
-      position: relative;
-      padding-bottom: 56.25%;
-      height: 0;
-      overflow: hidden;
-      margin-bottom: 20px;
+    .accordion-button {
+      background-color: #007bff;
+      color: #fff;
     }
-    .video-container iframe {
-      position: absolute;
-      top: 0;
-      left: 0;
-      width: 100%;
-      height: 100%;
+    .accordion-button:not(.collapsed) {
+      background-color: #0056b3;
     }
-    /* Post Styles */
-    .post {
-      background: #eee;
-      padding: 15px;
-      margin-bottom: 15px;
-      border-left: 5px solid #bb1919;
-    }
-    /* Accordion for Readings */
-    .accordion {
-      border: 1px solid #ccc;
-      margin-bottom: 10px;
-      border-radius: 5px;
-      overflow: hidden;
-    }
-    .accordion summary {
-      background: #ddd;
-      padding: 10px;
-      cursor: pointer;
-      font-weight: bold;
-    }
-    .accordion div {
-      padding: 10px;
-      background: #f9f9f9;
-    }
-    /* Button Styles */
-    button {
-      padding: 10px 20px;
-      background: #bb1919;
-      color: white;
-      border: none;
-      cursor: pointer;
-      margin-top: 10px;
-    }
-    button:hover {
-      background: #a11717;
-    }
-    textarea {
-      width: 100%;
-      height: 150px;
-      padding: 10px;
-      margin-top: 10px;
+    .accordion-button:focus {
+      box-shadow: none;
     }
   </style>
-  <script>
-    // Function to switch between tabs
-    function openTab(tabName) {
-      const tabs = document.getElementsByClassName("tab-content");
-      for (let i = 0; i < tabs.length; i++) {
-        tabs[i].classList.remove("active");
-      }
-      document.getElementById(tabName).classList.add("active");
-    }
-  </script>
 </head>
 <body>
-  <header>
-    <h1>Technology Applied to Teaching L2</h1>
-    <p>Welcome to our blog for using technology in L2, designed by Christiam Puentes.</p>
-  </header>
-  <div class="top-menu">
-    <a href="#" onclick="openTab('home')">Home</a>
-    <a href="#" onclick="openTab('listening')">Listening</a>
-    <a href="#" onclick="openTab('speaking')">Speaking</a>
-    <a href="#" onclick="openTab('reading')">Reading</a>
-    <a href="#" onclick="openTab('writing')">Writing</a>
+  <div class="sidebar" id="sidebar">
+    <h2>Activities</h2>
+    <ul>
+      <li><a href="#" onclick="openTab('activity1')">Activity 1</a></li>
+      <li><a href="#" onclick="openTab('activity2')">Activity 2</a></li>
+      <li><a href="#" onclick="openTab('activity3')">Activity 3</a></li>
+      <li><a href="#" onclick="openTab('activity4')">Activity 4</a></li>
+      <li><a href="#" onclick="openTab('activity5')">Activity 5</a></li>
+    </ul>
   </div>
-  <div class="container">
-    <!-- Sidebar with dropdown menu for activities -->
-    <div class="sidebar">
-      <details open>
-        <summary>Activities</summary>
-        <ul>
-          <li>Activity 1: Vocabulary Matching</li>
-          <li>Activity 2: Listening Comprehension</li>
-          <li>Activity 3: Role-Play Exercise</li>
-          <li>Activity 4: Reading Quiz</li>
-          <li>Activity 5: Writing Prompt</li>
-        </ul>
-      </details>
-      <!-- Additional dropdown menus can be added here -->
-    </div>
-    <div class="main-content">
-      <!-- Home Tab -->
-      <div id="home" class="tab-content active">
-        <h2>Home</h2>
-        <p>Welcome to our blog where we explore innovative ways to use technology in teaching a second language (L2). Here, you'll find interactive activities, engaging resources, and insightful readings to enhance language learning.</p>
-        <div class="video-container">
-          <iframe src="https://www.youtube.com/embed/mzT2Up5icbM" frameborder="0" allowfullscreen></iframe>
-        </div>
+  <div class="content">
+    <ul class="nav nav-tabs" id="myTab" role="tablist">
+      <li class="nav-item" role="presentation">
+        <button class="nav-link active" id="home-tab" data-bs-toggle="tab" data-bs-target="#home" type="button" role="tab" aria-controls="home" aria-selected="true" onclick="toggleSidebar('home')">Home</button>
+      </li>
+      <li class="nav-item" role="presentation">
+        <button class="nav-link" id="activities-tab" data-bs-toggle="tab" data-bs-target="#activities" type="button" role="tab" aria-controls="activities" aria-selected="false" onclick="toggleSidebar('activities')">Activities</button>
+      </li>
+    </ul>
+    <div class="tab-content" id="myTabContent">
+      <div class="tab-pane fade show active" id="home" role="tabpanel" aria-labelledby="home-tab">
+        <h1>Welcome to the Technology Applied to L2 Teaching Blog</h1>
+        <p>This blog, designed by Christiam Puentes, is dedicated to exploring how technology can be effectively integrated into second language (L2) teaching. Here, you'll find various activities and readings aimed at enhancing language learning through technological tools.</p>
       </div>
-      <!-- Listening Tab -->
-      <div id="listening" class="tab-content">
-        <h2>Listening Activities</h2>
-        <div class="post">
-          <h3>Video: Listening Practice</h3>
-          <div class="video-container">
-            <iframe src="https://www.youtube.com/embed/BBUNymWSCe0" frameborder="0" allowfullscreen></iframe>
+      <div class="tab-pane fade" id="activities" role="tabpanel" aria-labelledby="activities-tab">
+        <h2>Interactive Readings</h2>
+        <div class="accordion" id="readingAccordion">
+          <!-- Reading 1 -->
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingOne">
+              <button class="accordion-button" type="button" data-bs-toggle="collapse" data-bs-target="#collapseOne" aria-expanded="true" aria-controls="collapseOne">
+                Reading 1: The Role of Technology in Language Learning
+              </button>
+            </h2>
+            <div id="collapseOne" class="accordion-collapse collapse show" aria-labelledby="headingOne" data-bs-parent="#readingAccordion">
+              <div class="accordion-body">
+                <p>Technology has transformed language learning by providing access to authentic materials and interactive platforms. Tools such as language learning apps, online courses, and virtual reality environments offer immersive experiences that enhance linguistic skills.</p>
+                <h3>Questions:</h3>
+                <ul>
+                  <li>How has technology changed traditional language learning methods?</li>
+                  <li>What are some examples of technological tools used in language learning?</li>
+                  <li>How can virtual reality contribute to language acquisition?</li>
+                </ul>
+              </div>
+            </div>
           </div>
-          <p><strong>Exercise:</strong> What is 3 + 5?</p>
-          <input type="text" id="sumAnswer" placeholder="Your answer">
-          <button onclick="if(parseInt(document.getElementById('sumAnswer').value)===8){alert('Correct!');} else {alert('Try again.');}">Check Answer</button>
-        </div>
-      </div>
-      <!-- Speaking Tab -->
-      <div id="speaking" class="tab-content">
-        <h2>Speaking Activities</h2>
-        <div class="post">
-          <h3>Chat with GPT Exercise</h3>
-          <p>Click the button below to start a conversation with ChatGPT.</p>
-          <button onclick="window.open('https://chat.openai.com/', '_blank')">Talk to ChatGPT</button>
-        </div>
-      </div>
-      <!-- Reading Tab with Accordions -->
-      <div id="reading" class="tab-content">
-        <h2>Reading Activities</h2>
-        <!-- Reading 1: Letter to a Friend -->
-        <div class="accordion">
-          <details>
-            <summary>Letter to a Friend</summary>
-            <div>
-              <p><strong>Letter to a Friend:</strong></p>
-              <p>
-                Hi, Fred!<br><br>
-                It's been a while since we have been in touch. How has your semester been?<br><br>
-                I wanted to send an email update to you to let you know how things have been going during my semester abroad in Málaga, Spain. I've been here for six weeks and I feel like I'm finally adapting to the culture. I'm also speaking the language more fluently.<br><br>
-                I arrived during the first week of September. The weather has been very nice – even though it's October, it's still sunny and warm. In fact, I went to the beach and swam in the Mediterranean Sea earlier today.<br><br>
-                I'm living with a very welcoming host family. I have my own private bedroom, but we eat together for all meals. On Sundays, we enjoy a big home-cooked paella for lunch. In Spain, lunch is usually the biggest meal of the day and it's common to take a nap after.<br><br>
-                On weekdays, I attend classes at a local university where I've met several native Spanish speakers. They have been kind and patient with me, and my understanding has greatly improved.<br><br>
-                I'm so glad I decided to spend the semester here. We even have an extended weekend coming up, and my friends and I plan to travel to France for a few days. I look forward to hearing from you soon.<br><br>
-                Best wishes,<br>
-                Patrick
-              </p>
-              <p><strong>Questions:</strong></p>
-              <ul>
-                <li>In which country is Patrick studying?</li>
-                <li>What meal is described as the biggest of the day in Spain?</li>
-              </ul>
-              <p><strong>Source:</strong> Personal letter</p>
+          <!-- Reading 2 -->
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingTwo">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse" data-bs-target="#collapseTwo" aria-expanded="false" aria-controls="collapseTwo">
+                Reading 2: Mobile-Assisted Language Learning (MALL)
+              </button>
+            </h2>
+            <div id="collapseTwo" class="accordion-collapse collapse" aria-labelledby="headingTwo" data-bs-parent="#readingAccordion">
+              <div class="accordion-body">
+                <p>Mobile-Assisted Language Learning (MALL) refers to the use of mobile devices to support language learning. Smartphones and tablets enable learners to practice language skills anytime and anywhere, making learning more flexible and personalized.</p>
+                <h3>Questions:</h3>
+                <ul>
+                  <li>What is MALL, and how does it differ from traditional language learning?</li>
+                  <li>What are the benefits of using mobile devices for language learning?</li>
+                  <li>Can you name some popular language learning apps available on mobile devices?</li>
+                </ul>
+              </div>
             </div>
-          </details>
-        </div>
-        <!-- Reading 2: Technology in the Classroom -->
-        <div class="accordion">
-          <details>
-            <summary>Technology in the Classroom</summary>
-            <div>
-              <p>This article discusses the integration of digital tools into language classrooms, emphasizing the benefits of interactive technologies for enhancing student engagement and language practice.</p>
-              <p><strong>Questions:</strong></p>
-              <ul>
-                <li>What are the key benefits of using digital tools in language teaching?</li>
-                <li>How can technology boost student engagement?</li>
-              </ul>
-              <p><strong>Source:</strong> EdTech Magazine</p>
-            </div>
-          </details>
-        </div>
-        <!-- Reading 3: Virtual Learning Environments -->
-        <div class="accordion">
-          <details>
-            <summary>Virtual Learning Environments</summary>
-            <div>
-              <p>This reading examines how virtual learning environments (VLEs) are transforming language education by offering online platforms that facilitate interactive and collaborative learning experiences.</p>
-              <p><strong>Questions:</strong></p>
-              <ul>
-                <li>What are virtual learning environments (VLEs)?</li>
-                <li>How do VLEs promote collaborative learning?</li>
-              </ul>
-              <p><strong>Source:</strong> Journal of Educational Technology</p>
-            </div>
-          </details>
-        </div>
-        <!-- Reading 4: Mobile Apps for Language Learning -->
-        <div class="accordion">
-          <details>
-            <summary>Mobile Apps for Language Learning</summary>
-            <div>
-              <p>This piece reviews several mobile applications designed to support language learning, discussing features that cater to different learning styles and enhance user engagement.</p>
-              <p><strong>Questions:</strong></p>
-              <ul>
-                <li>What features make mobile apps effective for language learning?</li>
-                <li>How do these apps accommodate various learning styles?</li>
-              </ul>
-              <p><strong>Source:</strong> Mobile Learning Today</p>
-            </div>
-          </details>
-        </div>
-        <!-- Reading 5: Social Media and Language Acquisition -->
-        <div class="accordion">
-          <details>
-            <summary>Social Media and Language Acquisition</summary>
-            <div>
-              <p>This article explores how social media platforms can serve as valuable tools for language acquisition, encouraging real-life communication and cultural exchange.</p>
-              <p><strong>Questions:</strong></p>
-              <ul>
-                <li>How can social media facilitate language learning?</li>
-                <li>What challenges might arise from using social media for language acquisition?</li>
-              </ul>
-              <p><strong>Source:</strong> Social Learning Journal</p>
-            </div>
-          </details>
-        </div>
-        <!-- Reading 6: The Future of Language Education -->
-        <div class="accordion">
-          <details>
-            <summary>The Future of Language Education</summary>
-            <div>
-              <p>This reading speculates on future trends in language education, including the impact of emerging technologies such as AI, VR, and adaptive learning systems in creating personalized learning experiences.</p>
-              <p><strong>Questions:</strong></p>
-              <ul>
-                <li>Which emerging technologies are expected to influence language education?</li>
-                <li>How might adaptive learning systems personalize the learning experience?</li>
-              </ul>
-              <p><strong>Source:</strong> Future of Education Forum</p>
-            </div>
-          </details>
-        </div>
-      </div>
-      <!-- Writing Tab -->
-      <div id="writing" class="tab-content">
-        <h2>Writing Activities</h2>
-        <div class="post">
-          <h3>Writing Prompt Generator</h3>
-          <button onclick="generateTopic()">Generate a Random Writing Topic</button>
-          <p id="topicDisplay" style="font-weight: bold; margin-top: 10px;"></p>
-          <textarea placeholder="Write your response here..."></textarea>
-          <script>
-            function generateTopic() {
-              var topics = [
-                "Describe your favorite technological tool for language learning.",
-                "Explain how technology can overcome challenges in L2 teaching.",
-                "Discuss the impact of digital media on language acquisition.",
-                "What are the benefits of using mobile apps in language education?",
-                "How can AI personalize the learning experience in a language classroom?"
-              ];
-              var randomIndex = Math.floor(Math.random() * topics.length);
-              document.getElementById("topicDisplay").innerText = topics[randomIndex];
-            }
-          </script>
-        </div>
-      </div>
-    </div>
-  </div>
-</body>
-</html>
+          </div>
+          <!-- Reading 3 -->
+          <div class="accordion-item">
+            <h2 class="accordion-header" id="headingThree">
+              <button class="accordion-button collapsed" type="button" data-bs-toggle="collapse
+::contentReference[oaicite:0]{index=0}
+ 
