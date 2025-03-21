@@ -17,52 +17,34 @@
     header {
       background: #bb1919;
       color: white;
-      padding: 15px;
+      padding: 20px;
       text-align: center;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
     /* Top Navigation Menu */
     .top-menu {
       background: #222;
       display: flex;
       justify-content: center;
+      padding: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
     .top-menu a {
       color: white;
       text-decoration: none;
       padding: 15px 20px;
       font-size: 18px;
-      transition: background 0.3s;
+      transition: background 0.3s, transform 0.3s;
     }
     .top-menu a:hover {
       background: #bb1919;
+      transform: translateY(-3px);
     }
     /* Layout Container */
     .container {
       display: flex;
       flex: 1;
       min-height: 80vh;
-    }
-    /* Sidebar (Left Menu) */
-    .sidebar {
-      width: 250px;
-      background: #f0f0f0;
-      padding: 15px;
-      border-right: 1px solid #ccc;
-    }
-    .sidebar details {
-      margin-bottom: 10px;
-    }
-    .sidebar summary {
-      cursor: pointer;
-      font-weight: bold;
-      padding: 5px;
-    }
-    .sidebar ul {
-      list-style: none;
-      padding-left: 15px;
-    }
-    .sidebar li {
-      margin-bottom: 5px;
     }
     /* Main Content Area */
     .main-content {
@@ -72,9 +54,14 @@
     /* Tab Content */
     .tab-content {
       display: none;
+      animation: fadeIn 0.5s ease-in-out;
     }
     .tab-content.active {
       display: block;
+    }
+    @keyframes fadeIn {
+      from { opacity: 0; }
+      to { opacity: 1; }
     }
     /* Video Container */
     .video-container {
@@ -83,6 +70,8 @@
       height: 0;
       overflow: hidden;
       margin-bottom: 20px;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
     .video-container iframe {
       position: absolute;
@@ -90,29 +79,44 @@
       left: 0;
       width: 100%;
       height: 100%;
+      border-radius: 10px;
     }
     /* Post Styles */
     .post {
-      background: #eee;
-      padding: 15px;
-      margin-bottom: 15px;
+      background: #fff;
+      padding: 20px;
+      margin-bottom: 20px;
       border-left: 5px solid #bb1919;
+      border-radius: 10px;
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+      transition: transform 0.3s;
     }
-    /* Accordion for Readings */
+    .post:hover {
+      transform: translateY(-5px);
+    }
+    /* Accordion for Sections */
     .accordion {
       border: 1px solid #ccc;
       margin-bottom: 10px;
-      border-radius: 5px;
+      border-radius: 10px;
       overflow: hidden;
+      transition: box-shadow 0.3s;
+    }
+    .accordion:hover {
+      box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
     }
     .accordion summary {
       background: #ddd;
-      padding: 10px;
+      padding: 15px;
       cursor: pointer;
       font-weight: bold;
+      transition: background 0.3s;
+    }
+    .accordion summary:hover {
+      background: #ccc;
     }
     .accordion div {
-      padding: 10px;
+      padding: 15px;
       background: #f9f9f9;
     }
     /* Button Styles */
@@ -123,15 +127,49 @@
       border: none;
       cursor: pointer;
       margin-top: 10px;
+      border-radius: 5px;
+      transition: background 0.3s, transform 0.3s;
     }
     button:hover {
       background: #a11717;
+      transform: translateY(-3px);
     }
     textarea {
       width: 100%;
       height: 150px;
       padding: 10px;
       margin-top: 10px;
+      border-radius: 5px;
+      border: 1px solid #ccc;
+    }
+    /* Chat Container */
+    .chat-container {
+      width: 100%;
+      height: 500px;
+      border: 1px solid #ccc;
+      margin-top: 20px;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    /* Scratch Project Container */
+    .scratch-container {
+      width: 100%;
+      height: 600px;
+      border: 1px solid #ccc;
+      margin-top: 20px;
+      border-radius: 10px;
+      overflow: hidden;
+    }
+    /* Multiple Choice Questions */
+    .mcq {
+      margin-top: 15px;
+    }
+    .mcq p {
+      font-weight: bold;
+    }
+    .mcq label {
+      display: block;
+      margin: 5px 0;
     }
   </style>
   <script>
@@ -142,6 +180,16 @@
         tabs[i].classList.remove("active");
       }
       document.getElementById(tabName).classList.add("active");
+    }
+
+    // Function to check MCQ answers
+    function checkAnswers(questionId, correctAnswer) {
+      const selected = document.querySelector(`input[name="${questionId}"]:checked`);
+      if (selected && selected.value === correctAnswer) {
+        alert("Correct! 🎉");
+      } else {
+        alert("Incorrect. Try again! 🧐");
+      }
     }
   </script>
 </head>
@@ -158,20 +206,6 @@
     <a href="#" onclick="openTab('writing')">Writing</a>
   </div>
   <div class="container">
-    <!-- Sidebar with dropdown menu for activities -->
-    <div class="sidebar">
-      <details open>
-        <summary>Activities</summary>
-        <ul>
-          <li>Activity 1: Vocabulary Matching</li>
-          <li>Activity 2: Listening Comprehension</li>
-          <li>Activity 3: Role-Play Exercise</li>
-          <li>Activity 4: Reading Quiz</li>
-          <li>Activity 5: Writing Prompt</li>
-        </ul>
-      </details>
-      <!-- Additional dropdown menus can be added here -->
-    </div>
     <div class="main-content">
       <!-- Home Tab -->
       <div id="home" class="tab-content active">
@@ -180,36 +214,81 @@
         <div class="video-container">
           <iframe src="https://www.youtube.com/embed/mzT2Up5icbM" frameborder="0" allowfullscreen></iframe>
         </div>
+        <div class="video-container">
+          <iframe src="https://www.youtube.com/embed/9_RxaeN0FGw" frameborder="0" allowfullscreen></iframe>
+        </div>
       </div>
       <!-- Listening Tab -->
       <div id="listening" class="tab-content">
         <h2>Listening Activities</h2>
-        <div class="post">
-          <h3>Video: Listening Practice</h3>
-          <div class="video-container">
-            <iframe src="https://www.youtube.com/embed/BBUNymWSCe0" frameborder="0" allowfullscreen></iframe>
-          </div>
-          <p><strong>Exercise:</strong> What is 3 + 5?</p>
-          <input type="text" id="sumAnswer" placeholder="Your answer">
-          <button onclick="if(parseInt(document.getElementById('sumAnswer').value)===8){alert('Correct!');} else {alert('Try again.');}">Check Answer</button>
+        <div class="accordion">
+          <details>
+            <summary>Listening Practice 1</summary>
+            <div>
+              <h3>Video: Listening Practice</h3>
+              <div class="video-container">
+                <iframe src="https://www.youtube.com/embed/BBUNymWSCe0" frameborder="0" allowfullscreen></iframe>
+              </div>
+              <p><strong>Exercise:</strong> What is the main topic of the video?</p>
+              <input type="text" id="videoAnswer" placeholder="Your answer">
+              <button onclick="alert('Thanks for your answer!')">Submit Answer</button>
+            </div>
+          </details>
+        </div>
+        <div class="accordion">
+          <details>
+            <summary>Listening Practice 2</summary>
+            <div>
+              <h3>Audio: Listening Comprehension</h3>
+              <audio controls>
+                <source src="https://www.soundhelix.com/examples/mp3/SoundHelix-Song-1.mp3" type="audio/mpeg">
+                Your browser does not support the audio element.
+              </audio>
+              <p><strong>Exercise:</strong> Summarize the main idea of the audio in one sentence.</p>
+              <textarea placeholder="Write your summary here..."></textarea>
+              <button onclick="alert('Thanks for your answer!')">Submit Answer</button>
+            </div>
+          </details>
         </div>
       </div>
       <!-- Speaking Tab -->
       <div id="speaking" class="tab-content">
         <h2>Speaking Activities</h2>
-        <div class="post">
-          <h3>Chat with GPT Exercise</h3>
-          <p>Click the button below to start a conversation with ChatGPT.</p>
-          <button onclick="window.open('https://chat.openai.com/', '_blank')">Talk to ChatGPT</button>
+        <div class="accordion">
+          <details>
+            <summary>Scratch Project: Speaking Practice</summary>
+            <div>
+              <div class="scratch-container">
+                <iframe src="https://scratch.mit.edu/projects/1145724760/embed" allowtransparency="true" width="100%" height="100%" frameborder="0"></iframe>
+              </div>
+            </div>
+          </details>
+        </div>
+        <div class="accordion">
+          <details>
+            <summary>Chat with DeepSeek</summary>
+            <div>
+              <h3>Practice English with DeepSeek</h3>
+              <p>Welcome! Here you can practice your English skills with me. Click the button below to start a conversation. You can ask me questions, practice speaking, or even get feedback on your writing. Let's get started!</p>
+              <button onclick="openChat()">Talk to DeepSeek</button>
+              <div class="chat-container" id="chatContainer" style="display: none;">
+                <iframe src="https://www.deepseek.com/chat" width="100%" height="100%" frameborder="0"></iframe>
+              </div>
+              <script>
+                function openChat() {
+                  document.getElementById("chatContainer").style.display = "block";
+                }
+              </script>
+            </div>
+          </details>
         </div>
       </div>
       <!-- Reading Tab with Accordions -->
       <div id="reading" class="tab-content">
         <h2>Reading Activities</h2>
-        <!-- Reading 1: Letter to a Friend -->
         <div class="accordion">
           <details>
-            <summary>Letter to a Friend</summary>
+            <summary>Reading 1: Letter to a Friend</summary>
             <div>
               <p><strong>Letter to a Friend:</strong></p>
               <p>
@@ -223,87 +302,33 @@
                 Best wishes,<br>
                 Patrick
               </p>
-              <p><strong>Questions:</strong></p>
-              <ul>
-                <li>In which country is Patrick studying?</li>
-                <li>What meal is described as the biggest of the day in Spain?</li>
-              </ul>
-              <p><strong>Source:</strong> Personal letter</p>
+              <div class="mcq">
+                <p><strong>Questions:</strong></p>
+                <p>1. In which country is Patrick studying?</p>
+                <label><input type="radio" name="q1" value="a"> a) France</label>
+                <label><input type="radio" name="q1" value="b"> b) Spain</label>
+                <label><input type="radio" name="q1" value="c"> c) Italy</label>
+                <button onclick="checkAnswers('q1', 'b')">Check Answer</button>
+              </div>
             </div>
           </details>
         </div>
-        <!-- Reading 2: Technology in the Classroom -->
         <div class="accordion">
           <details>
-            <summary>Technology in the Classroom</summary>
+            <summary>Reading 2: Technology in the Classroom</summary>
             <div>
-              <p>This article discusses the integration of digital tools into language classrooms, emphasizing the benefits of interactive technologies for enhancing student engagement and language practice.</p>
-              <p><strong>Questions:</strong></p>
-              <ul>
-                <li>What are the key benefits of using digital tools in language teaching?</li>
-                <li>How can technology boost student engagement?</li>
-              </ul>
-              <p><strong>Source:</strong> EdTech Magazine</p>
-            </div>
-          </details>
-        </div>
-        <!-- Reading 3: Virtual Learning Environments -->
-        <div class="accordion">
-          <details>
-            <summary>Virtual Learning Environments</summary>
-            <div>
-              <p>This reading examines how virtual learning environments (VLEs) are transforming language education by offering online platforms that facilitate interactive and collaborative learning experiences.</p>
-              <p><strong>Questions:</strong></p>
-              <ul>
-                <li>What are virtual learning environments (VLEs)?</li>
-                <li>How do VLEs promote collaborative learning?</li>
-              </ul>
-              <p><strong>Source:</strong> Journal of Educational Technology</p>
-            </div>
-          </details>
-        </div>
-        <!-- Reading 4: Mobile Apps for Language Learning -->
-        <div class="accordion">
-          <details>
-            <summary>Mobile Apps for Language Learning</summary>
-            <div>
-              <p>This piece reviews several mobile applications designed to support language learning, discussing features that cater to different learning styles and enhance user engagement.</p>
-              <p><strong>Questions:</strong></p>
-              <ul>
-                <li>What features make mobile apps effective for language learning?</li>
-                <li>How do these apps accommodate various learning styles?</li>
-              </ul>
-              <p><strong>Source:</strong> Mobile Learning Today</p>
-            </div>
-          </details>
-        </div>
-        <!-- Reading 5: Social Media and Language Acquisition -->
-        <div class="accordion">
-          <details>
-            <summary>Social Media and Language Acquisition</summary>
-            <div>
-              <p>This article explores how social media platforms can serve as valuable tools for language acquisition, encouraging real-life communication and cultural exchange.</p>
-              <p><strong>Questions:</strong></p>
-              <ul>
-                <li>How can social media facilitate language learning?</li>
-                <li>What challenges might arise from using social media for language acquisition?</li>
-              </ul>
-              <p><strong>Source:</strong> Social Learning Journal</p>
-            </div>
-          </details>
-        </div>
-        <!-- Reading 6: The Future of Language Education -->
-        <div class="accordion">
-          <details>
-            <summary>The Future of Language Education</summary>
-            <div>
-              <p>This reading speculates on future trends in language education, including the impact of emerging technologies such as AI, VR, and adaptive learning systems in creating personalized learning experiences.</p>
-              <p><strong>Questions:</strong></p>
-              <ul>
-                <li>Which emerging technologies are expected to influence language education?</li>
-                <li>How might adaptive learning systems personalize the learning experience?</li>
-              </ul>
-              <p><strong>Source:</strong> Future of Education Forum</p>
+              <p><strong>Technology in the Classroom:</strong></p>
+              <p>
+                The integration of digital tools into language classrooms has revolutionized the way students learn. Interactive technologies such as smartboards, language learning apps, and online platforms have made lessons more engaging and accessible. Teachers can now use multimedia resources to explain complex concepts, while students can practice at their own pace using personalized learning tools.
+              </p>
+              <div class="mcq">
+                <p><strong>Questions:</strong></p>
+                <p>1. What is one benefit of using digital tools in language teaching?</p>
+                <label><input type="radio" name="q2" value="a"> a) Increased cost</label>
+                <label><input type="radio" name="q2" value="b"> b) Enhanced engagement</label>
+                <label><input type="radio" name="q2" value="c"> c) Limited accessibility</label>
+                <button onclick="checkAnswers('q2', 'b')">Check Answer</button>
+              </div>
             </div>
           </details>
         </div>
@@ -311,24 +336,31 @@
       <!-- Writing Tab -->
       <div id="writing" class="tab-content">
         <h2>Writing Activities</h2>
-        <div class="post">
-          <h3>Writing Prompt Generator</h3>
-          <button onclick="generateTopic()">Generate a Random Writing Topic</button>
-          <p id="topicDisplay" style="font-weight: bold; margin-top: 10px;"></p>
-          <textarea placeholder="Write your response here..."></textarea>
-          <script>
-            function generateTopic() {
-              var topics = [
-                "Describe your favorite technological tool for language learning.",
-                "Explain how technology can overcome challenges in L2 teaching.",
-                "Discuss the impact of digital media on language acquisition.",
-                "What are the benefits of using mobile apps in language education?",
-                "How can AI personalize the learning experience in a language classroom?"
-              ];
-              var randomIndex = Math.floor(Math.random() * topics.length);
-              document.getElementById("topicDisplay").innerText = topics[randomIndex];
-            }
-          </script>
+        <div class="accordion">
+          <details>
+            <summary>Writing Prompt Generator</summary>
+            <div>
+              <h3>Writing Prompt Generator</h3>
+              <button onclick="generateTopic()">Generate a Random Writing Topic</button>
+              <p id="topicDisplay" style="font-weight: bold; margin-top: 10px;"></p>
+              <textarea placeholder="Write your response here..."></textarea>
+              <p><strong>Need help with vocabulary?</strong> Use the dictionary below:</p>
+              <a href="https://www.wordreference.com/" target="_blank">WordReference Dictionary</a>
+              <script>
+                function generateTopic() {
+                  var topics = [
+                    "Describe your favorite technological tool for language learning.",
+                    "Explain how technology can overcome challenges in L2 teaching.",
+                    "Discuss the impact of digital media on language acquisition.",
+                    "What are the benefits of using mobile apps in language education?",
+                    "How can AI personalize the learning experience in a language classroom?"
+                  ];
+                  var randomIndex = Math.floor(Math.random() * topics.length);
+                  document.getElementById("topicDisplay").innerText = topics[randomIndex];
+                }
+              </script>
+            </div>
+          </details>
         </div>
       </div>
     </div>
